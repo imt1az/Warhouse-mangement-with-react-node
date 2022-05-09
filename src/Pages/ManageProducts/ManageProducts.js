@@ -21,7 +21,7 @@ const ManageProducts = () => {
 
     useEffect(()=>{
        const getProducts = async()=>{
-           const email = user.email;
+           const email = user?.email;
           const url =`https://salty-fjord-90713.herokuapp.com/manageProducts?email=${email}`
          try{
           const {data} = await axios.get(url,{

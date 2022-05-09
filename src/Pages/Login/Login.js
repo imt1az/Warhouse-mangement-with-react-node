@@ -6,10 +6,12 @@ import Social from "../Shared/Social/Social";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import useToken from "../Hooks/useToken";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  const [token] = useToken(user);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,15 +39,14 @@ const Login = () => {
     const password = passRef.current.value;
     await signInWithEmailAndPassword(email, password);
 
-    const { data } = await axios.post("https://salty-fjord-90713.herokuapp.com/login", { email });
-    localStorage.setItem("accessToken", data.accessToken);
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
 
     emailRef.current.value = "";
     passRef.current.value = "";
   };
-  if (user) {
+  if(token) {
     toast("You Are Loged In");
+    navigate(from, { replace: true });
   }
 
   return (
