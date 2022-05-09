@@ -4,7 +4,13 @@ const Blog = () => {
   return (
     <div className="text-4xl font-semibold text-center bg-green-200 py-32 px-10 min-h-screen w-2/3 mx-auto ">
       <h1 className="mt-5">1.Difference between javascript and nodejs</h1>
-    
+      <p className="text-2xl font ">
+        JavaScript is a simple programming language that runs in any browser
+        JavaScript Engine. Whereas Node JS is an interpreter or running
+        environment for a JavaScript programming language that holds many
+        excesses, it requires libraries that can easily be accessed from
+        JavaScript programming for better use.
+      </p>
       <h1 className="mt-5">
         2.When should you use nodejs and when should you use mongodb
       </h1>
