@@ -37,9 +37,7 @@ const Register = () => {
     console.log(user);
   };
 
-  if(token) {
-    navigate("/home");
-  }
+ 
 
   return (
     <div>
