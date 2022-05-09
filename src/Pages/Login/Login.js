@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Social from "../Shared/Social/Social";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import useToken from "../Hooks/useToken";
@@ -11,6 +11,9 @@ import useToken from "../Hooks/useToken";
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(
+      auth
+    );
   const [token] = useToken(user);
 
   const navigate = useNavigate();
@@ -47,6 +50,17 @@ const Login = () => {
   if(token) {
     toast("You Are Loged In");
     navigate(from, { replace: true });
+  }
+
+  const resetEmail = async()=>{
+    const email = emailRef.current.value;
+   if(email){
+    await sendPasswordResetEmail(email);
+    toast('Sent email');
+   }
+   else{
+     toast('Please Enter your Email address')
+   }
   }
 
   return (
@@ -100,7 +114,7 @@ const Login = () => {
                     {errorElement}
                   </div>
 
-                  {/* <button onClick={resetEmail} className="text-blue-800"><p>Forgot password?</p></button> */}
+                  <button onClick={resetEmail} className="text-blue-800"><p>Forgot password?</p></button>
                 </div>
                 <div>
                   <p>{error ? error.message : ""}</p>
