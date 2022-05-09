@@ -16,7 +16,7 @@ import Blog from './Pages/Shared/Blog';
 
 function App() {
   return (
-    <div>
+    <div style={{backgroundColor: "lightblue"}}>
     <Header></Header>
     <Routes>
       <Route path='/' element={<Home></Home>}></Route>
